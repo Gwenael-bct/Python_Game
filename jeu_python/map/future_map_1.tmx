@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="17">
+<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="30">
  <tileset firstgid="1" source="ciel_1.tsx"/>
  <tileset firstgid="1396" source="carte_Dofus_2D.tsx"/>
  <tileset firstgid="1576" source="arbre.tsx"/>
@@ -275,7 +275,7 @@
    <point/>
   </object>
   <object id="3" type="collision" x="1.9125" y="1025.66" width="1918.18" height="64.6729"/>
-  <object id="4" type="collision" x="126.577" y="707.664" width="1791.51" height="58.0062"/>
+  <object id="4" type="collision" x="68.577" y="707.664" width="1849.51" height="58.0062"/>
   <object id="5" type="collision" x="1.57667" y="192.997" width="10.18" height="832.673"/>
   <object id="6" name="player" x="160" y="900">
    <point/>
@@ -293,6 +293,25 @@
   <object id="16" name="slime_2" x="998" y="594">
    <point/>
   </object>
+  <object id="17" name="slime_5" x="562" y="350">
+   <point/>
+  </object>
+  <object id="18" name="slime_4" x="952" y="372">
+   <point/>
+  </object>
+  <object id="19" name="slime_3" x="396" y="670">
+   <point/>
+  </object>
+  <object id="20" type="collision" x="1120" y="371" width="70" height="48"/>
+  <object id="21" type="collision" x="1219" y="326" width="52" height="48"/>
+  <object id="22" type="collision" x="968" y="422" width="52" height="48"/>
+  <object id="23" type="collision" x="230" y="588" width="52" height="48"/>
+  <object id="24" type="collision" x="38" y="298" width="52" height="48"/>
+  <object id="25" type="collision" x="154" y="370" width="74" height="48"/>
+  <object id="26" type="collision" x="701" y="530" width="74" height="48"/>
+  <object id="27" type="collision" x="655" y="448" width="106" height="48"/>
+  <object id="28" type="collision" x="834" y="296" width="52" height="48"/>
+  <object id="29" type="collision" x="1031" y="258" width="106" height="48"/>
  </objectgroup>
  <objectgroup id="10" name="NPC_Path">
   <object id="7" name="paul_path2" x="863.955" y="863.955" width="32.0895" height="32.0895"/>

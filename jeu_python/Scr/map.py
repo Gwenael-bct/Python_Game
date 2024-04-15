@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from player import NPC
 from momy import Monster
 from monstres.slime_test import Slime
+import random
 import os
 
 # répertoire du script actuel
@@ -27,15 +28,15 @@ class Map:
     npcs: list[NPC]
     monsters: list[Monster]
 
-
 class MapManager:
 
     def __init__(self, screen, player):
+        # Générez les monstres et ajoutez-les à la liste des monstres
+        
         self.maps = dict()
         self.screen = screen
         self.player = player
         self.current_map = "future_map_1"
-
         self.register_map(self.current_map, portals=[
             Portal(from_world=self.current_map, origin_point="map_suivante", target_world="map_2", teleport_point="spawn_map_suivante")
         ], npcs=[
@@ -43,8 +44,7 @@ class MapManager:
                                              "Prépare toi à affronter des monstres terribles."])
         ,], monsters=[
         Monster(),
-        Slime("1"),
-        Slime("2")   
+        *[Slime(random.randint(1, 5)) for _ in range(random.randint(1, 5))]  
         ])
         self.register_map("map_2", portals=[
             Portal(from_world="map_2", origin_point="go_map_1", target_world="future_map_1", teleport_point="spawn_map_1" ),
@@ -112,7 +112,7 @@ class MapManager:
                 walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
         # dessine le groupe de calques
-        group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
+        group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
         group.add(self.player)
 
         for npc in npcs:

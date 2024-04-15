@@ -5,8 +5,10 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
 class Projectile(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, orientation="left", flip=False):
         super().__init__()
+        self.flip = flip
+        self.orientation = orientation
         self.position =[x, y]
         self.velocity = 10
         self.damage = 50
@@ -36,6 +38,8 @@ class Projectile(pygame.sprite.Sprite):
         if self.animation_counter % self.animation_delay == 0:
             self.current_image = (self.current_image + 1) % len(self.images)
             self.image = self.images[self.current_image]
+            if self.flip:
+                self.image = pygame.transform.flip(self.image, True, False)
 
     def rotate(self):
         # Tourner le projectile
@@ -45,7 +49,13 @@ class Projectile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=self.rect.center)
 
     def move(self):
+        if self.orientation == "right":
             self.position[0] += self.velocity
             self.rect.topleft = self.position
+        elif self.orientation == "left":
+            self.flip = True
+            self.position[0] -= self.velocity
+            self.rect.topleft = self.position
+                
 
 #        self.rotate()

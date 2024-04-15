@@ -22,6 +22,7 @@ class Game:
 
         # generer un joueur
         self.player = Player()
+        self.orientation = "right"
         self.all_projectiles = pygame.sprite.Group()
         self.map_manager = MapManager(self.screen, self.player)
         self.monsters = self.map_manager.get_map().monsters
@@ -46,8 +47,10 @@ class Game:
             self.player.move_down()
         elif pressed[pygame.K_q]:
             self.player.move_left()
+            self.orientation = "left"
         elif pressed[pygame.K_d]:
             self.player.move_right()
+            self.orientation = "right"
 
     def update(self):
         self.map_manager.update()
@@ -97,13 +100,13 @@ class Game:
                         self.spell_use = "fireball"
                         # Vérifie le cooldown avant de lancer une boule de feu
                         if self.player.cd == 0:
-                            self.player.shoot()
+                            self.player.shoot(self.orientation)
                             # Défini le cooldown à 2 secondes (120 trames à 60 FPS)
                             self.player.cd = 80
                     elif event.key == pygame.K_t:
                         self.spell_use = "iceball"
                         if self.player.cd == 0:
-                            self.player.shoot()
+                            self.player.shoot(self.orientation)
                             # Défini le cooldown à 2 secondes (120 trames à 60 FPS)
                             self.player.cd = 80
                         

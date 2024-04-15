@@ -64,9 +64,9 @@ class Player(Entity):
         self.cd = 0.0
 
 
-    def shoot(self):
+    def shoot(self, orientation):
         # Lorsque le joueur tire, créez un projectile en passant ses coordonnées actuelles
-        projectile = Projectile(self.position[0], self.position[1])
+        projectile = Projectile(self.position[0], self.position[1], orientation)
         # Ajoute le projectile au groupe des projectiles du joueur
         self.all_projectiles.add(projectile)
 
@@ -124,9 +124,3 @@ class NPC(Entity):
             point = tmx_data.get_object_by_name(f'{self.name}_path{num}')
             rect = pygame.Rect(point.x, point.y, point.width, point.height)
             self.points.append(rect)
-
-
-
-
-
-
