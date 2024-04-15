@@ -1,9 +1,9 @@
 import pygame, pytmx, pyscroll
 from dataclasses import dataclass
 from player import NPC
-from monster import Monster
+from momy import Monster
+from monstres.slime_test import Slime
 import os
-import math
 
 # répertoire du script actuel
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +42,9 @@ class MapManager:
             NPC("paul", nb_points=2, dialog=["Jeune aventurier tu est le bienvenue.","Bienvenue à 'Dream Land'.",
                                              "Prépare toi à affronter des monstres terribles."])
         ,], monsters=[
-          Monster()  
+        Monster(),
+        Slime("1"),
+        Slime("2")   
         ])
         self.register_map("map_2", portals=[
             Portal(from_world="map_2", origin_point="go_map_1", target_world="future_map_1", teleport_point="spawn_map_1" ),
@@ -221,22 +223,12 @@ class MapManager:
 
         # Met à jour les positions des projectiles et vérifie les collisions avec les monstres
         for projectile in self.player.all_projectiles:
-            # Vérification de la collision avec les monstres
-            if len(self.get_map().monsters[:]) > 0:
-                for monster in self.get_map().monsters[:]:
-                    dx = monster.rect.centerx - projectile.rect.centerx
-                    dy = monster.rect.centery - projectile.rect.centery
-                    distance = max(math.sqrt(dx ** 2 + dy ** 2), 1)
-                    direction = (dx / distance, dy / distance)
-                    projectile.move(direction)
-
-                    if monster.rect.colliderect(projectile.rect):
-                        # Modifie la santé du monstre ou retire le projectile si une collision est détectée
-                        monster.health -= projectile.damage
-                        self.player.all_projectiles.remove(projectile)
-                        break
-            else:
-                projectile.move()
+            projectile.move()
+            for monster in self.get_map().monsters:
+                if monster.rect.colliderect(projectile.rect):
+                    # Modifie la santé du monstre ou retire le projectile si une collision est détectée
+                    monster.health -= projectile.damage
+                    self.player.all_projectiles.remove(projectile)
                 
             # Supprime le projectile si hors de l'écran
             if (projectile.rect.x < 0 or projectile.rect.x > self.screen.get_width() or

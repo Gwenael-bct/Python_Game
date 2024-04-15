@@ -44,15 +44,7 @@ class Projectile(pygame.sprite.Sprite):
         self.image = rotated_image.convert_alpha()  # Convertissez en mode alpha après la rotation
         self.rect = self.image.get_rect(center=self.rect.center)
 
-
-
-    def move(self, direction=None):
-        if direction:
-            # Utilise la direction pour déplacer le projectile vers le monstre
-            self.position[0] += self.velocity * direction[0]
-            self.position[1] += self.velocity * direction[1]
-            self.rect.topleft = self.position
-        else:
+    def move(self):
             self.position[0] += self.velocity
             self.rect.topleft = self.position
 
