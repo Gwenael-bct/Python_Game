@@ -19,7 +19,7 @@ class Game:
         # fenetre de jeux
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN | pygame.SRCALPHA)
         pygame.display.set_caption('Dream Land')
-
+        
         # generer un joueur
         self.player = Player()
         self.orientation = "right"
@@ -64,6 +64,8 @@ class Game:
             self.player.save_location()
             self.handle_input()
             self.update()
+            print(self.player.position)
+            print(self.map_manager.player.position)
 
             # Mise à jour du cooldown de la boule de feu
             if self.player.cd > 0:
@@ -100,13 +102,13 @@ class Game:
                         self.spell_use = "fireball"
                         # Vérifie le cooldown avant de lancer une boule de feu
                         if self.player.cd == 0:
-                            self.player.shoot(self.orientation)
+                            self.player.shoot(self.orientation, self.map_manager)
                             # Défini le cooldown à 2 secondes (120 trames à 60 FPS)
                             self.player.cd = 80
                     elif event.key == pygame.K_t:
                         self.spell_use = "iceball"
                         if self.player.cd == 0:
-                            self.player.shoot(self.orientation)
+                            self.player.shoot(self.orientation, self.map_manager)
                             # Défini le cooldown à 2 secondes (120 trames à 60 FPS)
                             self.player.cd = 80
                         

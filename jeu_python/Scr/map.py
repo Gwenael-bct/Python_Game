@@ -139,6 +139,21 @@ class MapManager:
 
     def get_object(self, name): return self.get_map().tmx_data.get_object_by_name(name)
 
+    def entity_position_and_rect(self, entity):
+        # Récupérer les coordonnées de l'entité sur la carte
+        entity_map_position = entity.position
+        # Récupérer les coordonnées du rectangle de collision de l'entité sur la carte
+        entity_map_rect = entity.rect
+        # Récupérer la position de la caméra par rapport à la carte
+        camera_map_position = self.get_group().view.topleft  # Récupérer le coin supérieur gauche de la caméra
+        # Calculer la position de l'entité sur l'écran
+        entity_screen_x = entity_map_position[0] - camera_map_position[0]
+        entity_screen_y = entity_map_position[1] - camera_map_position[1]
+        # Calculer le rectangle de collision de l'entité sur l'écran
+        entity_screen_rect = entity_map_rect.move(-camera_map_position[0], -camera_map_position[1])
+        # Retourner les coordonnées de l'entité sur l'écran et son rectangle de collision
+        return entity_screen_x, entity_screen_y, entity_screen_rect
+    
     def teleport_npcs(self):
         for map in self.maps:
             map_data = self.maps[map]
@@ -159,6 +174,7 @@ class MapManager:
     def draw(self):
         self.get_group().draw(self.screen)
         self.get_group().center(self.player.rect.center)
+        self.draw_health_bar(self.player)
         for monster in self.get_map().monsters:
             if monster.health > 0:
                 self.draw_health_bar(monster)
@@ -172,10 +188,11 @@ class MapManager:
 
     def draw_health_bar(self, entity):
         # Calcule la position de la barre de vie
-        bar_width = entity.rect.width
+        entity_rect = self.entity_position_and_rect(entity)[-1]
+        bar_width = entity_rect.width
         bar_height = 5
-        bar_x = entity.rect.x
-        bar_y = entity.rect.y - bar_height - 5
+        bar_x = entity_rect.x
+        bar_y = entity_rect.y - bar_height - 7
         # Calcule la longueur de la barre de vie en fonction de la santé de l'entité
         health_ratio = entity.health / entity.max_health
         bar_length = int(bar_width * health_ratio)
@@ -188,8 +205,8 @@ class MapManager:
 
     def draw_collisions(self):
         for monster in self.get_map().monsters:
-            pygame.draw.rect(self.screen, (0, 255, 0), monster.rect, 2)  # Rectangle vert
-            pygame.draw.rect(self.screen, (255, 0, 0), monster.feet, 2)  # Rectangle rouge pour les pieds
+            monster_rect = self.entity_position_and_rect(monster)[-1]
+            pygame.draw.rect(self.screen, (0, 255, 0), monster_rect, 2)
 
         for wall in self.get_walls():
             pygame.draw.rect(self.screen, (0, 0, 255), wall, 2)
@@ -225,7 +242,8 @@ class MapManager:
         for projectile in self.player.all_projectiles:
             projectile.move()
             for monster in self.get_map().monsters:
-                if monster.rect.colliderect(projectile.rect):
+                monster_rect = self.entity_position_and_rect(monster)[-1]
+                if monster_rect.colliderect(projectile.rect):
                     # Modifie la santé du monstre ou retire le projectile si une collision est détectée
                     monster.health -= projectile.damage
                     self.player.all_projectiles.remove(projectile)

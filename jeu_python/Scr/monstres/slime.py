@@ -15,14 +15,11 @@ class AnimateSlime(pygame.sprite.Sprite):
         # Vitesse de l'animation
         self.speed = 25
         self.move_speed = 5
-        
         # Définir le rectangle de collision
         self.rect = self.images['first_row'][0].get_rect()
-
         # Largeur et hauteur de l'écran
         self.screen_width = screen_width
         self.screen_height = screen_height
-
         # Position initiale du slime
         self.x_pos = 15
         self.y_pos = 300

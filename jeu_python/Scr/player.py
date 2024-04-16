@@ -63,12 +63,14 @@ class Player(Entity):
         self.all_projectiles = pygame.sprite.Group()
         self.cd = 0.0
 
-
-    def shoot(self, orientation):
-        # Lorsque le joueur tire, créez un projectile en passant ses coordonnées actuelles
-        projectile = Projectile(self.position[0], self.position[1], orientation)
-        # Ajoute le projectile au groupe des projectiles du joueur
+    def shoot(self, orientation, map_manager):
+        # Récupérer les coordonnées et le rectangle de collision du joueur sur l'écran
+        player_screen_x, player_screen_y, player_screen_rect = map_manager.entity_position_and_rect(map_manager.player)
+        # Utiliser les coordonnées du joueur sur l'écran pour le tir
+        projectile = Projectile(player_screen_x, player_screen_y, orientation)
+        # Ajouter le projectile au groupe des projectiles du joueur
         self.all_projectiles.add(projectile)
+
 
     def check_collision(self, monster):
         collision_rect = monster.rect.copy()  # Copier le rectangle de collision du monstre
