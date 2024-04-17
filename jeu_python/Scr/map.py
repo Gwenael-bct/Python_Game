@@ -1,8 +1,8 @@
 import pygame, pytmx, pyscroll
 from dataclasses import dataclass
-from player import NPC
-from momy import Monster
-from monstres.slime_test import Slime
+from Player_pnj.player import NPC
+from monstres.momy import Mommy
+from monstres.slime import Slime
 import random
 import os
 
@@ -26,7 +26,7 @@ class Map:
     tmx_data: pytmx.TiledMap
     portals: list[Portal]
     npcs: list[NPC]
-    monsters: list[Monster]
+    monsters: list[Mommy]
 
 class MapManager:
 
@@ -43,7 +43,7 @@ class MapManager:
             NPC("paul", nb_points=2, dialog=["Jeune aventurier tu est le bienvenue.","Bienvenue à 'Dream Land'.",
                                              "Prépare toi à affronter des monstres terribles."])
         ,], monsters=[
-        Monster(),
+        Mommy(),
         *[Slime(random.randint(1, 5)) for _ in range(random.randint(1, 5))]  
         ])
         self.register_map("map_2", portals=[
@@ -88,13 +88,10 @@ class MapManager:
                     sprite.speed = 0
                 else:
                     sprite.speed = 0.5
-            if type(sprite) is not (Monster):            
+            if type(sprite) is not (Mommy):            
                 if sprite.feet.collidelist(self.get_walls()) > -1:
                     sprite.move_back()
             
-            
-
-
     def register_map(self, name, portals=[], npcs=[], monsters=[]):
         # charger la carte (tmx)
         tmx_data = pytmx.util_pygame.load_pygame(f'../map/{name}.tmx')
@@ -185,7 +182,6 @@ class MapManager:
             projectile.animate() 
             self.screen.blit(projectile.image, projectile.rect)
 
-
     def draw_health_bar(self, entity):
         # Calcule la position de la barre de vie
         entity_rect = self.entity_position_and_rect(entity)[-1]
@@ -196,7 +192,9 @@ class MapManager:
         # Calcule la longueur de la barre de vie en fonction de la santé de l'entité
         health_ratio = entity.health / entity.max_health
         bar_length = int(bar_width * health_ratio)
+        bar_length_max = int(bar_width * (entity.max_health / entity.max_health))
         # Dessine la barre de vie
+        pygame.draw.rect(self.screen, (0, 0, 0), (bar_x, bar_y, bar_length_max, bar_height))
         pygame.draw.rect(self.screen, (0, 255, 0), (bar_x, bar_y, bar_length, bar_height))
 
     ########################################################################################
@@ -210,6 +208,13 @@ class MapManager:
 
         for wall in self.get_walls():
             pygame.draw.rect(self.screen, (0, 0, 255), wall, 2)
+
+    def draw_spell_range(self, max_range):
+        player_rect = self.entity_position_and_rect(self.player)[-1]
+        max_range = max_range
+        player_center_x = player_rect.x + player_rect.width / 2
+        player_center_y =player_rect.y + player_rect.height / 2
+        pygame.draw.circle(self.screen, (255, 0, 0), (int(player_center_x), int(player_center_y)), max_range, 1)
     
     ########################################################################################
     ###########################    DEBUG VISUEL     ########################################
@@ -219,7 +224,6 @@ class MapManager:
     def update(self):
         self.get_group().update()
         self.check_collisions()
-
         # Liste temporaire pour stocker les monstres morts
         dead_monsters = []
         
@@ -237,21 +241,6 @@ class MapManager:
             self.get_group().remove(monster)
             # Supprimez également le monstre de la liste des monstres de la carte
             self.get_map().monsters.remove(monster)
-
-        # Met à jour les positions des projectiles et vérifie les collisions avec les monstres
-        for projectile in self.player.all_projectiles:
-            projectile.move()
-            for monster in self.get_map().monsters:
-                monster_rect = self.entity_position_and_rect(monster)[-1]
-                if monster_rect.colliderect(projectile.rect):
-                    # Modifie la santé du monstre ou retire le projectile si une collision est détectée
-                    monster.health -= projectile.damage
-                    self.player.all_projectiles.remove(projectile)
-                
-            # Supprime le projectile si hors de l'écran
-            if (projectile.rect.x < 0 or projectile.rect.x > self.screen.get_width() or
-                projectile.rect.y < 0 or projectile.rect.y > self.screen.get_height()):
-                self.player.all_projectiles.remove(projectile)
 
         for npc in self.get_map().npcs:
             npc.move()

@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "petite_map_1.tmx",
+    "activeFile": "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx",
     "expandedProjectPaths": [
-        "tuiles map",
         ".",
-        ".idea/inspectionProfiles"
+        ".idea/inspectionProfiles",
+        "tuiles map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -56,7 +56,8 @@
             "scaleInDock": 1
         },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/gate/gate.tsx": {
             "scaleInDock": 1
@@ -159,14 +160,14 @@
         },
         "future_map_1.tmx": {
             "expandedObjectLayers": [
-                9,
-                10
+                10,
+                9
             ],
             "scale": 0.5,
-            "selectedLayer": 7,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 961,
-                "y": 544
+                "x": 959,
+                "y": 540
             }
         },
         "gate.tsx": {
@@ -251,8 +252,8 @@
         },
         "map_1.tmx": {
             "expandedObjectLayers": [
-                19,
-                14
+                14,
+                19
             ],
             "scale": 0.75,
             "selectedLayer": 8,
@@ -277,8 +278,8 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 330.5,
-                "y": 160
+                "x": 329.5,
+                "y": 159
             }
         },
         "map_2.tmx#ciel_1": {
@@ -314,8 +315,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 765,
-                "y": 428
+                "x": 763,
+                "y": 424
             }
         },
         "test.tmx": {
@@ -344,14 +345,14 @@
         },
         "test_minimap.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1185.3333333333335,
-                "y": 484.6666666666666
+                "x": 745,
+                "y": 552
             }
         },
         "tuiles map/gate.tsx": {
@@ -453,7 +454,9 @@
         "map_1.tmx",
         "future_map_1.tmx",
         "petite_map_1.tmx",
-        "petit_arbre.tsx"
+        "petit_arbre.tsx",
+        "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx",
+        "test_minimap.tmx"
     ],
     "project": "map-project.tiled-project",
     "property.type": "string",
@@ -462,14 +465,14 @@
         "map_2.tmx",
         "map_1.tmx",
         "future_map_1.tmx",
-        "petit_arbre.tsx",
         "petite_map_1.tmx",
+        "petit_arbre.tsx",
         "test_minimap.tmx",
+        "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx",
         "ciel_1 - Copie.tsx",
         "test.tmx",
         "test2.tmx",
-        "carte_Dofus_2D.tsx",
-        "nature(4k).tsx"
+        "carte_Dofus_2D.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

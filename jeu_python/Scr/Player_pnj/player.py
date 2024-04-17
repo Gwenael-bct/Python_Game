@@ -1,7 +1,7 @@
 import pygame
 
-from animation import AnimateSprite
-from projectile import Projectile
+from Player_pnj.animation import AnimateSprite
+from Spell.projectile import Fire_ball
 import os
 
 # répertoire du script actuel
@@ -67,7 +67,7 @@ class Player(Entity):
         # Récupérer les coordonnées et le rectangle de collision du joueur sur l'écran
         player_screen_x, player_screen_y, player_screen_rect = map_manager.entity_position_and_rect(map_manager.player)
         # Utiliser les coordonnées du joueur sur l'écran pour le tir
-        projectile = Projectile(player_screen_x, player_screen_y, orientation)
+        projectile = Fire_ball(player_screen_x, player_screen_y, orientation)
         # Ajouter le projectile au groupe des projectiles du joueur
         self.all_projectiles.add(projectile)
 

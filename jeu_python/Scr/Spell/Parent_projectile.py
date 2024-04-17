@@ -5,8 +5,9 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
 class Projectile(pygame.sprite.Sprite):
-    def __init__(self, x, y, orientation="left", flip=False):
+    def __init__(self, x, y, orientation="left", flip=False, max_range=300):
         super().__init__()
+        self.max_range = max_range
         self.flip = flip
         self.orientation = orientation
         self.position =[x, y]
