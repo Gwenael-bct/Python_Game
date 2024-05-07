@@ -30,11 +30,14 @@ Maj à faire:
     En cours
     -   Recréer monstre quand on revient sur la map:
     Fait
-    -   Création new perso + animation attack:
-    En cours
-    -   Continuer l'histoire du jeu (plus de dialogs, zone ouvertes a certaines conditions):
-    En cours
     -   Ajout de notion d'expérience et level + caractéristique + spell dispo en fonction du lvl:
+    En cours
+
+################################################################################################
+################################################################################################
+Lot 3:
+Maj à faire:  
+    -   Continuer l'histoire du jeu (plus de dialogs, zone ouvertes a certaines conditions):
     En cours
     -   Ajout inventaire:
     En cours
@@ -44,7 +47,7 @@ Maj à faire:
     En cours
     -   Création nouvelles maps:
     En cours
-################################################################################################
-
+    -   Création new perso + animation attack:
+    En cours
 
 Les mises à jour sont organisées dans l'ordre de priorité ; je débuterai par celle située en haut de la liste et conclurai par celle en bas.

@@ -1,4 +1,4 @@
-import pygame
+import pygame, pytmx
 from dialog import DialogBox
 from map import MapManager
 from Player_pnj.player import Player
@@ -23,13 +23,13 @@ class Game:
         self.etats = Etats()
         self.map_manager = MapManager(self.screen, self.player)
         self.monsters = self.map_manager.get_map().monsters
-        self.dialog_box = DialogBox()
+        self.dialog_box = DialogBox(self.screen)
         self.spell_use = set() 
 
         # Spell properties
         self.spell_properties = {
             "fireball": {"icon": pygame.image.load("ressources/sort/spell_bar/feu.PNG"), "max_range": 1300,
-                         "cd": 0, "wait_cd": 250 * self.player.cdr, "level_required": 1},
+                         "cd": 0, "wait_cd": 20 * self.player.cdr, "level_required": 1},
             "iceball": {"icon": pygame.image.load("ressources/sort/spell_bar/glace.JPG"), "max_range": 500,
                         "cd": 0, "wait_cd": 80 * self.player.cdr, "level_required": 10},
             "lave": {"icon": pygame.image.load("ressources/sort/spell_bar/lave.JPG"), "max_range": 800,
@@ -81,7 +81,7 @@ class Game:
             self.update()
             pos = pygame.mouse.get_pos()
             self.player.level_up()
-            
+
             for monster in self.map_manager.get_map().monsters:
                 monster.apply_state()        
 
@@ -103,10 +103,9 @@ class Game:
                         if projectile.projectile_type != "Explosion":
                             self.player.all_projectiles.remove(projectile)
 
-
-            # Dessiner la carte, les collisions et la boîte de dialogue
             self.map_manager.draw()
             #self.map_manager.draw_collisions()
+            self.map_manager.draw_condition_walls()
 
             self.dialog_box.render(self.screen)
 

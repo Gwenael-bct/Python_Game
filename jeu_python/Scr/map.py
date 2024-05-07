@@ -7,6 +7,7 @@ from monstres.rabbit import Rabbit
 import random
 import os
 
+
 # répertoire du script actuel
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,6 +25,7 @@ class Portal:
 class Map:
     name: str
     walls: list[pygame.Rect]
+    walls_condition: list[pygame.Rect]
     group: pyscroll.PyscrollGroup
     tmx_data: pytmx.TiledMap
     portals: list[Portal]
@@ -42,14 +44,18 @@ class MapManager:
         self.maps = dict()
         self.screen = screen
         self.player = player
+        self.width = 27
+        self.height = 27
         self.initial_monster_config = {
             "future_map_1": [
                 MonsterConfig(Rabbit, [3, 5, 1, 5], {}),
                 MonsterConfig(Slime, [1, 5, 1, 5], {})
+            ],
+            "map_3": [
+                MonsterConfig(Rabbit, [3, 5, 1, 5], {}),
+                MonsterConfig(Slime, [1, 5, 1, 5], {})
             ]
         }
-
-
 
         self.current_map = "future_map_1"
         self.map1 = self.register_map(self.current_map, portals=[
@@ -64,17 +70,25 @@ class MapManager:
         
         self.map2 = self.register_map("map_2", portals=[
                 Portal(from_world="map_2", origin_point="go_map_1", target_world="future_map_1", teleport_point="map1" ),
-                Portal(from_world="map_2", origin_point="enter_house", target_world="house",
-                    teleport_point="spawn_house_2")
+                Portal(from_world="map_2", origin_point="enter_house", target_world="house", teleport_point="spawn_house_2"),
+                Portal(from_world= "map_2", origin_point="go_map_3", target_world="map_3", teleport_point="map3")
                 ])
         
-        self.map3 = self.register_map("house", portals=[
+        self.map_maison = self.register_map("house", portals=[
             Portal(from_world="house", origin_point="exit_house_2", target_world="map_2", teleport_point="enter_house_exit" )
         ])
+
+        self.map_3 = self.register_map("map_3", portals=[
+            Portal(from_world="map_3", origin_point="go_map_2", target_world="map_2", teleport_point="map2" )],
+            monsters=[
+                *[Rabbit(random.randint(1, 5)) for _ in range(random.randint(3, 5))],
+                *[Slime(random.randint(1, 5)) for _ in range(random.randint(1, 5))]  
+                ])
 
         self.teleport_player("player")
         self.teleport_npcs()
         self.teleport_monsters()
+        
 
     def teleport_player(self, name):
         point = self.get_object(name)
@@ -85,7 +99,7 @@ class MapManager:
     def check_npc_collisions(self, dialog_box):
         for sprite in self.get_group().sprites():
             if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
-                dialog_box.execute(sprite.dialog)
+                dialog_box.execute(sprite.dialog)                    
 
     def check_collisions(self):
         for portal in self.get_map().portals:
@@ -119,21 +133,21 @@ class MapManager:
         
         # liste qui stocke les rectangles de collisions
         walls = []
-
+        walls_condition = []
         for npc in npcs:
             walls.append(npc.rect)
-
         for obj in tmx_data.objects:
             if obj.type == "collision":
                 walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
-
+        for obj in tmx_data.objects:
+            if obj.type == "collision_condition":
+                walls_condition.append((obj.id, pygame.Rect(obj.x, obj.y, obj.width, obj.height)))
+                walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
         # dessine le groupe de calques
-        group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
+        group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
         group.add(self.player)
-
         for npc in npcs:
             group.add(npc)
-
         # Ajouter les monstres à la carte
         for monster in monsters:
             group.add(monster)
@@ -143,13 +157,15 @@ class MapManager:
         for projectile in self.player.all_projectiles:
             group.add(projectile)
         #créé objet map
-        self.maps[name] = Map(name, walls, group, tmx_data, portals, npcs, monsters)
+        self.maps[name] = Map(name, walls, walls_condition, group, tmx_data, portals, npcs, monsters)
 
     def get_map(self): return self.maps[self.current_map]
 
     def get_group(self): return self.get_map().group
 
     def get_walls(self): return self.get_map().walls
+
+    def get_walls_condition(self): return self.get_map().walls_condition
 
     def get_object(self, name): return self.get_map().tmx_data.get_object_by_name(name)
 
@@ -167,6 +183,15 @@ class MapManager:
         entity_screen_rect = entity_map_rect.move(-camera_map_position[0], -camera_map_position[1])
         # Retourner les coordonnées de l'entité sur l'écran et son rectangle de collision
         return entity_screen_x, entity_screen_y, entity_screen_rect
+    
+    def real_position_wall(self, collision_rect):
+        # Récupérer la position de la caméra par rapport à la carte
+        camera_map_position = self.get_group().view.topleft  # Récupérer le coin supérieur gauche de la caméra
+        # Calculer le rectangle de collision sur l'écran
+        collision_screen_rect = collision_rect.move(-camera_map_position[0], -camera_map_position[1])
+        # Retourner les coordonnées du rectangle de collision sur l'écran
+        return collision_screen_rect
+
     
     def teleport_npcs(self):
         for map in self.maps:
@@ -342,8 +367,6 @@ class MapManager:
         # Dessiner le texte au centre de la barre
         self.screen.blit(text_surface, (text_x, text_y))
 
-        
-
     ########################################################################################
     ###########################    DEBUG VISUEL     ########################################
     ########################################################################################
@@ -354,7 +377,13 @@ class MapManager:
             pygame.draw.rect(self.screen, (0, 255, 0), monster_rect, 2)
 
         for wall in self.get_walls():
+            wall = self.real_position_wall(wall)
             pygame.draw.rect(self.screen, (0, 0, 255), wall, 2)
+
+    def draw_condition_walls(self):
+        for wall in self.get_walls_condition():
+            real_rect = self.real_position_wall(wall[1])
+            pygame.draw.rect(self.screen, (255, 0, 0), real_rect, 4)
 
     def draw_spell_range(self, max_range):
         player_rect = self.entity_position_and_rect(self.player)[-1]
@@ -367,10 +396,31 @@ class MapManager:
     ###########################    DEBUG VISUEL     ########################################
     ########################################################################################
 
+    def walls_condition_properties(self):
+        condition_walls = {
+            "future_map_1": {
+                "4": True if sum(1 for monster in self.get_map().monsters if monster.type_monster == "rabbit") == 0 else False,
+                "35": True if sum(1 for monster in self.get_map().monsters if monster.type_monster == "slime") == 0 else False,
+            },
+            "map_2": {
+                "condition": True if sum(1 for monster in self.get_map().monsters if monster.type_monster == "rabbit") == 0 else False,
+            }
+        }
+        return condition_walls
 
     def update(self):
         self.get_group().update()
         self.check_collisions()
+        walls_properties = self.walls_condition_properties()
+        for map_name, properties in walls_properties.items():
+            if map_name == self.get_map().name:
+                for name, propertie  in properties.items():
+                    for wall in self.get_map().walls_condition:
+                        if str(wall[0]) == name and propertie:
+                            for wall_collision in self.get_map().walls:
+                                if wall_collision == wall[1]:
+                                    self.get_map().walls.remove(wall_collision)
+                                    self.get_map().walls_condition.remove(wall)
 
         player_x, player_y = self.entity_position_and_rect(self.player)[:2]
         for projectile in self.player.all_projectiles:      
@@ -384,6 +434,7 @@ class MapManager:
                 
         # Liste temporaire pour stocker les monstres morts
         dead_monsters = []
+        
         for monster in self.get_map().monsters:
             self.player.check_collision(monster, self.get_walls())
             if monster.health <= 0:

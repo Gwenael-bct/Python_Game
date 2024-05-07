@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="35">
+<map version="1.8" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="32" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="48">
  <tileset firstgid="1" source="ciel_1.tsx"/>
  <tileset firstgid="1396" source="carte_Dofus_2D.tsx"/>
  <tileset firstgid="1576" source="arbre.tsx"/>
@@ -139,8 +139,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1481,0,0,0,0,0,0,0,0,0,1483,1547,1481,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1501,1502,1502,1502,1502,1502,1502,1502,1502,1502,1503,1547,1481,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1547,1547,1547,1547,1547,1547,1547,1547,1547,1547,1547,1547,1481,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1461,1462,1462,1462,1462,1462,1462,1462,1462,1462,1463,1547,1481,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1481,0,0,0,0,0,0,0,0,0,1483,1547,1481,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1484,1462,1462,1462,1462,1462,1462,1462,1462,1462,1462,1462,1463,1547,1481,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1483,1547,1481,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -270,12 +270,12 @@
 </data>
  </layer>
  <objectgroup id="9" name="objects" class="colision">
-  <object id="1" name="map_suivante" x="1880.33" y="768.667" width="38" height="254.667"/>
+  <object id="1" name="map_suivante" x="1896.83" y="768.167" width="21" height="254.667"/>
   <object id="2" name="map1" x="1798" y="896">
    <point/>
   </object>
   <object id="3" type="collision" x="1.9125" y="1025.66" width="1918.18" height="64.6729"/>
-  <object id="4" type="collision" x="68.577" y="707.664" width="1849.51" height="58.0062"/>
+  <object id="4" type="collision_condition" x="0.577" y="704.164" width="1917.51" height="63.7562"/>
   <object id="5" type="collision" x="1.57667" y="192.997" width="10.18" height="832.673"/>
   <object id="6" name="player" x="160" y="900">
    <point/>
@@ -284,9 +284,9 @@
    <point/>
   </object>
   <object id="10" type="collision" x="8" y="158" width="1908" height="32"/>
-  <object id="11" type="collision" x="1330" y="264" width="584" height="58"/>
-  <object id="12" type="collision" x="1326" y="262" width="60" height="442"/>
-  <object id="13" type="collision" x="1910" y="184" width="6" height="84"/>
+  <object id="11" type="collision" x="1330" y="274" width="584" height="58"/>
+  <object id="12" type="collision" x="1326" y="274" width="60" height="380"/>
+  <object id="13" type="collision" x="1916" y="184" width="3" height="584"/>
   <object id="15" name="slime_1" x="348" y="282">
    <point/>
   </object>
@@ -325,6 +325,19 @@
    <point/>
   </object>
   <object id="34" type="collision" x="1896" y="773" width="16" height="246"/>
+  <object id="35" type="collision_condition" x="1875.5" y="766.5" width="42.5" height="259"/>
+  <object id="36" type="collision" x="73.3333" y="712.667" width="44.6667" height="50"/>
+  <object id="37" type="collision" x="361.667" y="711.667" width="44.6667" height="50"/>
+  <object id="38" type="collision" x="650.333" y="713.667" width="44.6667" height="50"/>
+  <object id="39" type="collision" x="937" y="713" width="44.6667" height="50"/>
+  <object id="40" type="collision" x="1193" y="714.333" width="44.6667" height="50"/>
+  <object id="41" type="collision" x="1418.33" y="714.333" width="44.6667" height="50"/>
+  <object id="42" type="collision" x="1609" y="714.333" width="44.6667" height="50"/>
+  <object id="43" type="collision" x="1866.33" y="713" width="44.6667" height="50"/>
+  <object id="44" type="collision" x="1714" y="465" width="60" height="287"/>
+  <object id="45" type="collision" x="1716" y="467" width="204" height="58"/>
+  <object id="46" type="collision" x="1338" y="595" width="391" height="58"/>
+  <object id="47" type="collision" x="1803.67" y="517" width="108.667" height="70"/>
  </objectgroup>
  <objectgroup id="10" name="NPC_Path">
   <object id="7" name="paul_path2" x="863.955" y="863.955" width="32.0895" height="32.0895"/>

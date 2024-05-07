@@ -3,11 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "future_map_1.tmx",
+    "activeFile": "map_3.tmx",
+    "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        ".",
         "tuiles map",
-        ".idea/inspectionProfiles",
-        "."
+        ".idea/inspectionProfiles"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -15,7 +16,178 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "#iso": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "#voxelTile_01": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_02": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_03": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_04": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_05": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_06": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_07": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_08": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_09": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_10": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_11": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_12": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_13": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_14": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_15": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_16": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_17": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_18": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_19": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_20": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_21": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_22": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_23": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_24": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_25": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_26": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_27": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_28": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_29": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_30": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_31": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_32": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_33": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_34": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_35": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_36": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_37": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_38": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_39": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_40": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_41": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_42": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_43": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_44": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_45": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "#voxelTile_46": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_47": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_48": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_49": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_50": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_51": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_52": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_53": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_54": {
+            "scaleInDock": 1
+        },
+        "#voxelTile_55": {
+            "scaleInDock": 1
+        },
         ":/automap-tiles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -62,6 +234,7 @@
             "scaleInDock": 1
         },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/Scr/ressources/tuiles map/house/house2.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx": {
@@ -137,6 +310,7 @@
             "scaleInEditor": 1
         },
         "arbre.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.25
         },
         "carte_Dofus_2D.tsx": {
@@ -169,14 +343,14 @@
         },
         "future_map_1.tmx": {
             "expandedObjectLayers": [
-                10,
-                9
+                9,
+                10
             ],
             "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 951,
-                "y": 536
+                "x": 1144,
+                "y": 550
             }
         },
         "gate.tsx": {
@@ -209,6 +383,28 @@
                 "x": 199.5,
                 "y": 199.5
             }
+        },
+        "iso.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4008,
+                "y": 1792
+            }
+        },
+        "iso.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "iso_graphics_test.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 0.5
+        },
+        "iso_terre_test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 0.75
         },
         "map1_4k.tmx": {
             "expandedObjectLayers": [
@@ -287,8 +483,8 @@
             "scale": 1,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 116.5,
-                "y": 240.5
+                "x": 467,
+                "y": 383
             }
         },
         "map_2.tmx#ciel_1": {
@@ -299,6 +495,17 @@
         },
         "map_2.tmx#ciel_all": {
             "scaleInDock": 1
+        },
+        "map_3.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1212.1212121212122,
+                "y": 1072.7272727272725
+            }
         },
         "nature 4516.tsx": {
             "scaleInDock": 0.33,
@@ -364,8 +571,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 860,
-                "y": 433
+                "x": 782,
+                "y": 586
             }
         },
         "tuiles map/gate.tsx": {
@@ -400,6 +607,10 @@
                 "x": 974,
                 "y": 313
             }
+        },
+        "voxelTile_55.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "world_map.tmx": {
             "expandedObjectLayers": [
@@ -454,42 +665,50 @@
     },
     "frame.defaultDuration": 1000,
     "last.externalTilesetPath": "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/map",
-    "last.imagePath": "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/nature",
+    "last.imagePath": "C:/Users/bauch/Documents/cours/projets_git/test_map_iso/isometric",
     "last.objectTypesPath": "C:/Users/bauch/cours/création jeu python/.idea/type.json",
-    "map.height": 34,
+    "map.height": 24,
     "map.lastUsedFormat": "tmx",
-    "map.tileHeight": 32,
-    "map.tileWidth": 32,
-    "map.width": 60,
+    "map.layerDataFormat": null,
+    "map.orientation": null,
+    "map.renderOrder": null,
+    "map.tileHeight": 64,
+    "map.tileWidth": 111,
+    "map.width": 24,
+    "mapScene.enableWorlds": false,
     "openFiles": [
         "future_map_1.tmx",
         "map_2.tmx",
-        "test_minimap.tmx"
+        "map_3.tmx",
+        "iso.tsx"
     ],
     "project": "map-project.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "test_minimap.tmx",
-        "map_2.tmx",
         "future_map_1.tmx",
+        "map_2.tmx",
+        "iso.tsx",
+        "map_3.tmx",
+        "carte_Dofus_2D.tsx",
+        "test_minimap.tmx",
+        "iso.tmx",
+        "iso_graphics_test.tsx",
+        "voxelTile_55.tsx",
+        "iso_terre_test.tsx",
         "map_1.tmx",
-        "petit_arbre_test.tsx",
-        "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/donjon/dungeon.tsx",
-        "petite_map_1.tmx",
-        "house.tmx",
-        "petit_arbre.tsx",
-        "ciel_1 - Copie.tsx",
-        "test.tmx",
-        "test2.tmx"
+        "petit_arbre_test.tsx"
     ],
+    "resizeMap.removeObjects": true,
+    "tileset.embedInMap": false,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
-    "tileset.margin": 10,
-    "tileset.spacing": 10,
+    "tileset.margin": 0,
+    "tileset.spacing": 0,
     "tileset.tileSize": {
-        "height": 32,
-        "width": 32
+        "height": 128,
+        "width": 111
     },
     "tileset.transparentColor": "#000000",
+    "tileset.type": 1,
     "tileset.useTransparentColor": true
 }

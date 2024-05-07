@@ -64,7 +64,7 @@ class Player(Entity):
         self.level = 1
         self.xp = 0
         self.max_xp = 100
-        self.current_speed = 3
+        self.current_speed = 12
         self.speed = self.current_speed
         self.current_frame = 0
         self.all_projectiles = pygame.sprite.Group()

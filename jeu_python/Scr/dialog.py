@@ -8,10 +8,13 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 class DialogBox:
 
-    X_POSITION = 200
-    Y_POSITION = 400
+    screen_width = 200
+    screen_height = 400
 
-    def __init__(self):
+    def __init__(self, screen):
+        self.screen = screen
+        self.screen_width = self.screen.get_width() // 2
+        self.screen_height = self.screen.get_height() // 2
         self.box = pygame.image.load('ressources/dialogs/dialog_box.png')
         self.box = pygame.transform.scale(self.box, (450, 50))
         self.texts = []
@@ -35,9 +38,9 @@ class DialogBox:
             if self.letter_index >= len(self.texts[self.text_index]):
                 self.letter_index = self.letter_index
 
-            screen.blit(self.box, (self.X_POSITION, self.Y_POSITION))
+            screen.blit(self.box, (self.screen_width, self.screen_height))
             text = self.font.render(self.texts[self.text_index][0:self.letter_index], False, (0, 0, 0))
-            screen.blit(text, (self.X_POSITION + 25, self.Y_POSITION + 30))
+            screen.blit(text, (self.screen_width + 25, self.screen_height + 30))
 
     def next_text(self):
         self.text_index +=1
