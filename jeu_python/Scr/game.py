@@ -4,6 +4,7 @@ from map import MapManager
 from Player_pnj.player import Player
 from Spell.spell_bar import SpellBar
 from Spell.state import Etats
+from Interface.characteristic import Characteristic
 import os
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +18,10 @@ class Game:
         # fenetre de jeux
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN | pygame.SRCALPHA)
         pygame.display.set_caption('Dream Land')
+        # Créer la fenêtre d'inventaire
+        self.inventory_window = Characteristic(self.screen)
+        self.show_inventory = False
+        self.dragging = False 
         # generer un joueur
         self.player = Player()
         self.all_projectiles = pygame.sprite.Group()
@@ -29,7 +34,7 @@ class Game:
         # Spell properties
         self.spell_properties = {
             "fireball": {"icon": pygame.image.load("ressources/sort/spell_bar/feu.PNG"), "max_range": 1300,
-                         "cd": 0, "wait_cd": 20 * self.player.cdr, "level_required": 1},
+                         "cd": 0, "wait_cd": 25 * self.player.cdr, "level_required": 1},
             "iceball": {"icon": pygame.image.load("ressources/sort/spell_bar/glace.JPG"), "max_range": 500,
                         "cd": 0, "wait_cd": 80 * self.player.cdr, "level_required": 10},
             "lave": {"icon": pygame.image.load("ressources/sort/spell_bar/lave.JPG"), "max_range": 800,
@@ -63,9 +68,6 @@ class Game:
             if self.player.repulsion == False:
                 self.player.move_right()
 
-    def update(self):
-        self.map_manager.update()
-    
     def run(self):
         clock = pygame.time.Clock()
         bullet = pygame.Surface((10, 10))
@@ -78,34 +80,17 @@ class Game:
         while running:
             self.player.save_location()
             self.handle_input()
-            self.update()
+            self.map_manager.update()
             pos = pygame.mouse.get_pos()
             self.player.level_up()
 
-            for monster in self.map_manager.get_map().monsters:
-                monster.apply_state()        
+            if self.show_inventory:
+                self.inventory_window.render(self.player)
+                self.inventory_window.handle_events(event)     
 
             # Boucle sur les projectiles du joueur
             for projectile in self.player.all_projectiles:
                 projectile.move(mouse_x, mouse_y)
-
-                # Vérifier les collisions avec les monstres
-                for monster in self.map_manager.get_map().monsters:
-                    monster.update_state_times()
-                    monster_rect = self.map_manager.entity_position_and_rect(monster)[-1]
-                    monster_rect_x, monster_rect_y = self.map_manager.entity_position_and_rect(monster)[:2]
-                    # Vérifier la collision avec les masques de collision
-                    if monster.mask.overlap(projectile.mask, (projectile.rect.x - monster_rect_x, projectile.rect.y - monster_rect_y)):
-                        # Ajouter la logique de collision ici
-                        monster.handle_state(projectile.state)
-                        monster.health -= projectile.damage * self.player.magic_power
-
-                        if projectile.projectile_type != "Explosion":
-                            self.player.all_projectiles.remove(projectile)
-
-            self.map_manager.draw()
-            #self.map_manager.draw_collisions()
-            self.map_manager.draw_condition_walls()
 
             self.dialog_box.render(self.screen)
 
@@ -114,7 +99,7 @@ class Game:
             text = text_font.render(f"Player: {self.player.position}", True, (255, 255, 255))
             self.screen.blit(text, (10, 10))  # Affiche les coordonnées en haut à gauche
 
-                        # Affichage des coordonnées du joueur à l'écran
+            # Affichage niveau du joueur à l'écran
             text_lvl = pygame.font.Font(None, 36)
             lvl = text_lvl.render(f"Player: {self.player.level}", True, (255, 255, 255))
             self.screen.blit(lvl, (10, 50))  # Affiche les coordonnées en haut à gauche
@@ -123,6 +108,7 @@ class Game:
             for spell_name, properties in self.spell_properties.items():
                 if self.player.level >= properties["level_required"]:
                     self.spell_icons[spell_name] = properties["icon"]
+
             # Dessiner la barre de sorts et la mettre a jour
             self.spell_bar.update()
             self.spell_bar.draw_spell_bar()
@@ -133,7 +119,6 @@ class Game:
                 if properties["cd"] != 0:
                     properties["cd"] -= 1
 
-
             # Dessiner la surface bullet au-dessus de tout
             bullet.fill(col)
             self.screen.blit(bullet, pos)
@@ -142,9 +127,16 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+
+                # dialog avec les pnj    
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e:
                         self.map_manager.check_npc_collisions(self.dialog_box)
+
+                # Inventaire
+                    elif event.key == pygame.K_c:
+                        self.show_inventory = not self.show_inventory 
+
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:
                         if self.spell_properties["fireball"]["cd"] == 0:

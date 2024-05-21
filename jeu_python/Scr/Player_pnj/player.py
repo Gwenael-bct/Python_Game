@@ -59,6 +59,10 @@ class Player(Entity):
         self.max_health = 100
         self.power = 1
         self.magic_power = 1
+        self.physic_power = 1
+        self.luck = 0
+        self.dexterity = 0
+        self.wisdom = 0
         self.mana = 100
         self.max_mana = 100
         self.level = 1
@@ -83,7 +87,8 @@ class Player(Entity):
         if self.xp >= self.max_xp:
             self.xp = 0
             self.level += 1
-            self.max_xp = self.max_xp * 1.2      
+            self.max_xp = self.max_xp * 1.2
+            self.health = self.max_health 
             self.carac_points += 5      
 
     def use_spell(self, spell_name, map_manager):

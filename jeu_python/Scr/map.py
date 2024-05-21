@@ -99,7 +99,7 @@ class MapManager:
     def check_npc_collisions(self, dialog_box):
         for sprite in self.get_group().sprites():
             if sprite.feet.colliderect(self.player.rect) and type(sprite) is NPC:
-                dialog_box.execute(sprite.dialog)                    
+                dialog_box.execute(sprite.dialog)              
 
     def check_collisions(self):
         for portal in self.get_map().portals:
@@ -367,6 +367,11 @@ class MapManager:
         # Dessiner le texte au centre de la barre
         self.screen.blit(text_surface, (text_x, text_y))
 
+
+    ###########################################################################################################################
+    ######################################      Dessin des bars d'xp, vie et mana        ######################################
+    ###########################################################################################################################
+
     ########################################################################################
     ###########################    DEBUG VISUEL     ########################################
     ########################################################################################
@@ -409,6 +414,9 @@ class MapManager:
         return condition_walls
 
     def update(self):
+        self.draw()
+        #self.map_manager.draw_collisions()
+        self.draw_condition_walls()
         self.get_group().update()
         self.check_collisions()
         walls_properties = self.walls_condition_properties()
@@ -431,12 +439,26 @@ class MapManager:
                 or projectile.rect.center[1] > (player_y + projectile.max_range)
                 ):
                 self.player.all_projectiles.remove(projectile)
+            
+            # Vérifier les collisions avec les monstres
+            for monster in self.get_map().monsters:
+                monster.update_state_times()
+                monster_rect = self.entity_position_and_rect(monster)[-1]
+                monster_rect_x, monster_rect_y = self.entity_position_and_rect(monster)[:2]
+                # Vérifier la collision avec les masques de collision
+                if monster.mask.overlap(projectile.mask, (projectile.rect.x - monster_rect_x, projectile.rect.y - monster_rect_y)):
+                    # Ajouter la logique de collision ici
+                    monster.handle_state(projectile.state)
+                    monster.health -= projectile.damage * self.player.magic_power
+                    if projectile.projectile_type != "Explosion":
+                        self.player.all_projectiles.remove(projectile)
                 
         # Liste temporaire pour stocker les monstres morts
         dead_monsters = []
-        
+
         for monster in self.get_map().monsters:
             self.player.check_collision(monster, self.get_walls())
+            monster.apply_state() 
             if monster.health <= 0:
                 # Ajouter les monstres morts à la liste temporaire
                 dead_monsters.append(monster)

@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map_3.tmx",
+    "activeFile": "house.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
+        ".idea/inspectionProfiles",
         "tuiles map",
-        ".idea/inspectionProfiles"
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -233,6 +233,9 @@
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/Scr/ressources/tuiles map/gate/gate.tsx": {
             "scaleInDock": 1
         },
+        "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/Scr/ressources/tuiles map/house/house(t_25).tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/Scr/ressources/tuiles map/house/house2.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
@@ -248,6 +251,38 @@
             "scaleInDock": 1
         },
         "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/tuiles map/house/house2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/Mapdemaelylaplusbelle.tmx": {
+            "scale": 0.21399739583333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 771.0374201399453,
+                "y": 1021.0404624277458
+            }
+        },
+        "C:/Users/bauch/Downloads/Water sample.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/carte_Dofus_2D.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/herbe2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/montagne.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/seasonal sample (summer).tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/shadow water.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/stone.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/bauch/Downloads/terre_herbe.tsx": {
             "scaleInDock": 1
         },
         "C:/Users/bauch/cours/création jeu python/tuiles map/donjon/dungeon.tsx": {
@@ -309,6 +344,17 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Mapdemaelylaplusbelle.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 854,
+                "y": 1028
+            }
+        },
+        "Water sample.tsx": {
+            "scaleInDock": 1
+        },
         "arbre.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.25
@@ -346,11 +392,11 @@
                 9,
                 10
             ],
-            "scale": 0.5,
-            "selectedLayer": 7,
+            "scale": 0.33,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1144,
-                "y": 550
+                "x": 631.8181818181818,
+                "y": 325.75757575757575
             }
         },
         "gate.tsx": {
@@ -373,6 +419,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "herbe2.tsx": {
+            "scaleInDock": 1
+        },
         "house.tmx": {
             "expandedObjectLayers": [
                 6
@@ -380,8 +429,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 199.5,
-                "y": 199.5
+                "x": 200,
+                "y": 214
             }
         },
         "iso.tmx": {
@@ -483,8 +532,8 @@
             "scale": 1,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 467,
-                "y": 383
+                "x": 113.5,
+                "y": 237.5
             }
         },
         "map_2.tmx#ciel_1": {
@@ -498,14 +547,17 @@
         },
         "map_3.tmx": {
             "expandedObjectLayers": [
-                3
+                2
             ],
-            "scale": 0.33,
-            "selectedLayer": 2,
+            "scale": 0.25,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1212.1212121212122,
-                "y": 1072.7272727272725
+                "x": 1478,
+                "y": 1286
             }
+        },
+        "montagne.tsx": {
+            "scaleInDock": 1
         },
         "nature 4516.tsx": {
             "scaleInDock": 0.33,
@@ -538,6 +590,18 @@
                 "x": 767,
                 "y": 430
             }
+        },
+        "seasonal sample (summer).tsx": {
+            "scaleInDock": 1
+        },
+        "shadow water.tsx": {
+            "scaleInDock": 1
+        },
+        "stone.tsx": {
+            "scaleInDock": 1
+        },
+        "terre_herbe.tsx": {
+            "scaleInDock": 1
         },
         "test.tmx": {
             "expandedObjectLayers": [
@@ -667,36 +731,37 @@
     "last.externalTilesetPath": "C:/Users/bauch/Documents/cours/projets_git/Python_Game/jeu_python/map",
     "last.imagePath": "C:/Users/bauch/Documents/cours/projets_git/test_map_iso/isometric",
     "last.objectTypesPath": "C:/Users/bauch/cours/création jeu python/.idea/type.json",
+    "map.fixedSize": false,
     "map.height": 24,
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": null,
     "map.orientation": null,
     "map.renderOrder": null,
-    "map.tileHeight": 64,
-    "map.tileWidth": 111,
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
     "map.width": 24,
     "mapScene.enableWorlds": false,
     "openFiles": [
         "future_map_1.tmx",
         "map_2.tmx",
         "map_3.tmx",
-        "iso.tsx"
+        "house.tmx"
     ],
     "project": "map-project.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "future_map_1.tmx",
         "map_2.tmx",
-        "iso.tsx",
         "map_3.tmx",
+        "house.tmx",
+        "Mapdemaelylaplusbelle.tmx",
+        "iso.tsx",
+        "C:/Users/bauch/Downloads/Mapdemaelylaplusbelle.tmx",
         "carte_Dofus_2D.tsx",
         "test_minimap.tmx",
         "iso.tmx",
         "iso_graphics_test.tsx",
-        "voxelTile_55.tsx",
-        "iso_terre_test.tsx",
-        "map_1.tmx",
-        "petit_arbre_test.tsx"
+        "voxelTile_55.tsx"
     ],
     "resizeMap.removeObjects": true,
     "tileset.embedInMap": false,
