@@ -1,9 +1,7 @@
 import pygame
-
 from Player_pnj.animation import AnimateSprite
 from Spell.spell import Spell
 import os
-import math
 
 # répertoire du script actuel
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +15,7 @@ class Entity(AnimateSprite):
         super().__init__(name)
         self.position = [x, y]
         self.image = self.get_image(0, 0)
+        self.image = pygame.transform.scale(self.image, (64, 64))
         self.image.set_colorkey([0, 0, 0])
         self.rect = self.image.get_rect()
 
@@ -57,7 +56,6 @@ class Player(Entity):
         self.attack = 10
         self.health = 100
         self.max_health = 100
-        self.power = 1
         self.magic_power = 1
         self.physic_power = 1
         self.luck = 0
@@ -82,6 +80,27 @@ class Player(Entity):
         self.repulsion_x = 0
         self.repulsion_y = 0
         self.carac_points = 0
+        self.allocated_points = {
+            'Vitalité': 0,
+            'Sagesse': 0,
+            "Magie": 0,
+            'Force': 0,
+            'Chance': 0,
+            'Agilité': 0
+        }
+        self.inventaire = {}
+
+    def get_item(self, item):
+        if self.rect.colliderect(item.rect):
+            if item.name in self.inventaire:
+                # Si l'item est déjà dans l'inventaire, ajoute simplement une instance supplémentaire à la liste
+                self.inventaire[item.name].append(item)
+            else:
+                # Sinon, crée une nouvelle liste avec une seule instance de l'item
+                self.inventaire[item.name] = [item]
+            print(f"inventaire du joueur: {self.inventaire}")
+            item.remove()
+            item.kill()
 
     def level_up(self):
         if self.xp >= self.max_xp:

@@ -20,7 +20,7 @@ class Game:
         pygame.display.set_caption('Dream Land')
         # Créer la fenêtre d'inventaire
         self.inventory_window = Characteristic(self.screen)
-        self.show_inventory = False
+        self.show_caracteristic = False
         self.dragging = False 
         # generer un joueur
         self.player = Player()
@@ -84,9 +84,9 @@ class Game:
             pos = pygame.mouse.get_pos()
             self.player.level_up()
 
-            if self.show_inventory:
+            if self.show_caracteristic:
                 self.inventory_window.render(self.player)
-                self.inventory_window.handle_events(event)     
+                self.inventory_window.handle_events(event, self.player)     
 
             # Boucle sur les projectiles du joueur
             for projectile in self.player.all_projectiles:
@@ -135,7 +135,7 @@ class Game:
 
                 # Inventaire
                     elif event.key == pygame.K_c:
-                        self.show_inventory = not self.show_inventory 
+                        self.show_caracteristic = not self.show_caracteristic 
 
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:

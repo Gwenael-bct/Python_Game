@@ -44,8 +44,7 @@ class MapManager:
         self.maps = dict()
         self.screen = screen
         self.player = player
-        self.width = 27
-        self.height = 27
+        self.dropped_items = []
         self.initial_monster_config = {
             "future_map_1": [
                 MonsterConfig(Rabbit, [3, 5, 1, 5], {}),
@@ -250,6 +249,8 @@ class MapManager:
             projectile.animate() 
             self.screen.blit(projectile.image, projectile.rect)
 
+        self.draw_dropped_items()
+
         ###########################################################################################################################
         ######################################      Dessin des bars d'xp, vie et mana        ######################################
         ###########################################################################################################################
@@ -310,7 +311,7 @@ class MapManager:
         # Calcule la longueur de la barre de vie en fonction de la santé de l'entité
         mana_ratio = (self.player.mana / self.player.max_mana)
         bar_length = int(bar_width * mana_ratio)
-        bar_length_max = int(bar_width * (self.player.max_health / self.player.max_mana))
+        bar_length_max = int(bar_width * (self.player.max_mana / self.player.max_mana))
         # Dessine la barre de vie
         pygame.draw.rect(self.screen, (0, 0, 0), (bar_x, bar_y, bar_length_max, bar_height))
         pygame.draw.rect(self.screen, (0, 0, 255), (bar_x, bar_y, bar_length, bar_height))
@@ -396,6 +397,30 @@ class MapManager:
         player_center_x = player_rect.x + player_rect.width / 2
         player_center_y =player_rect.y + player_rect.height / 2
         pygame.draw.circle(self.screen, (255, 0, 0), (int(player_center_x), int(player_center_y)), max_range, 1)
+
+    def draw_items(self, monster):
+        item, image_item, item_rect = monster.drop_item()
+        if image_item and item_rect:
+            self.dropped_items.append((item, image_item, item_rect))  # Stocker l'item dropé dans la liste
+
+    def draw_dropped_items(self):
+        for item, image_item, item_rect in self.dropped_items:
+            pygame.transform.scale(image_item, (128, 128))
+            self.screen.blit(image_item, item_rect)
+            
+
+    def get_item(self):
+        for item, image_item, item_rect in self.dropped_items:
+            if self.player.rect.colliderect(item_rect):
+                if item["name"] in self.player.inventaire:
+                    # Si l'item est déjà dans l'inventaire, ajoute simplement une instance supplémentaire à la liste
+                    self.player.inventaire[item["name"]].append(item)
+                else:
+                    # Sinon, crée une nouvelle liste avec une seule instance de l'item
+                    self.player.inventaire[item["name"]] = [item]
+                print(f"inventaire du joueur: {self.player.inventaire}")
+                self.dropped_items.remove((item, image_item, item_rect))
+
     
     ########################################################################################
     ###########################    DEBUG VISUEL     ########################################
@@ -415,6 +440,7 @@ class MapManager:
 
     def update(self):
         self.draw()
+        self.get_item()
         #self.map_manager.draw_collisions()
         self.draw_condition_walls()
         self.get_group().update()
@@ -443,7 +469,6 @@ class MapManager:
             # Vérifier les collisions avec les monstres
             for monster in self.get_map().monsters:
                 monster.update_state_times()
-                monster_rect = self.entity_position_and_rect(monster)[-1]
                 monster_rect_x, monster_rect_y = self.entity_position_and_rect(monster)[:2]
                 # Vérifier la collision avec les masques de collision
                 if monster.mask.overlap(projectile.mask, (projectile.rect.x - monster_rect_x, projectile.rect.y - monster_rect_y)):
@@ -460,6 +485,8 @@ class MapManager:
             self.player.check_collision(monster, self.get_walls())
             monster.apply_state() 
             if monster.health <= 0:
+                self.draw_items(monster)
+                print(self.dropped_items)
                 # Ajouter les monstres morts à la liste temporaire
                 dead_monsters.append(monster)
                 self.player.xp += monster.give_xp

@@ -1,6 +1,8 @@
 import pygame
 import os
 from Spell.state import Etats
+from Player_pnj.items import Item
+import random
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
@@ -28,14 +30,29 @@ class Monster(pygame.sprite.Sprite):
         self.states = []
         self.states_properties = Etats()
         self.states_properties_copy =  Etats()
+        self.items = Item().items
         self.repulsion_cooldown = 0
         self.repulsion_duration = 10
         self.repulsion_amount = 0
         self.repulsion = False
         self.repulsion_x = 0
         self.repulsion_y = 0
+        self.drop_position = None  # Ajouter un attribut pour la position de drop
         
 
+    def drop_item(self):
+        drop_chance = random.randint(1, 100)
+        if drop_chance <= 70:
+            item = Item.drop_random_item()
+            image_item = pygame.image.load(item["image"])
+            image_item.set_colorkey([0, 0, 0])
+            item_rect = image_item.get_rect()
+            item_rect.x = self.position[0]
+            item_rect.y = self.position[1]
+            return item, image_item, item_rect 
+        else:
+            return None, None, None
+            
     def apply_state(self):
         current_time = pygame.time.get_ticks()
         for state in self.states[:]:

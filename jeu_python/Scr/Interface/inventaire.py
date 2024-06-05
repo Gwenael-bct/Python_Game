@@ -4,16 +4,15 @@ import os
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
-class Characteristic:
+class Inventaire:
     def __init__(self, screen):
         self.screen = screen
-        self.width = 300
-        self.height = 700
+        self.width = 800
+        self.height = 600
         self.rect = pygame.Rect(100, 100, self.width, self.height)
         self.color = (50, 50, 50)
         self.image = pygame.image.load("ressources/caracteristique/player.png")
-        self.image_plus = pygame.image.load("ressources/caracteristique/plus.png")
-        self.image_minus = pygame.image.load("ressources/caracteristique/moins.png")
+        self.magic_bow = pygame.image.load("ressources/weapons/magic_bow.png")
         self.plus_image = pygame.transform.scale(self.image_plus, (20, 20))
         self.minus_image = pygame.transform.scale(self.image_minus, (25, 12))
         self.dragging = False

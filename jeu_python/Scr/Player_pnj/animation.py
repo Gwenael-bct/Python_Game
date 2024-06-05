@@ -22,6 +22,7 @@ class AnimateSprite(pygame.sprite.Sprite):
 
     def change_animation(self, name):
         self.image = self.images[name][self.animation_index]
+        self.image = pygame.transform.scale(self.image, (64, 64))
         self.image.set_colorkey([0, 0, 0])
         self.clock += self.speed * 5
 

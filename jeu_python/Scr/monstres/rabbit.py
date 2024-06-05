@@ -2,6 +2,7 @@ import pygame
 import random
 from monstres.monster import Monster
 import os
+from Player_pnj.items import Item
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
@@ -121,4 +122,3 @@ class Rabbit(Monster):
                     self.position[0] += self.repulsion_x
                     self.position[1] += self.repulsion_y
                     self.repulsion = False
-
