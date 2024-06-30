@@ -9,7 +9,9 @@ os.chdir(current_directory)
 
 class Item:
     items = {
-        "bâton magique": {"name": "Bâton magique", "rarity": "S", "magic_damage": 15, "price": 10, "description": "Bâton magique S permettant d'améliorer les dégâts magiques", "image": "ressources/sprites/weapons/magic_bow.png"},
+        "bâton magique": {"name": "Bâton magique", "rarity": "S", "stats":{"magic_power": 15, "health": 30, "max_health": 30}, "price": 10, 
+                        "description": "Bâton magique S permettant d'améliorer les dégâts magiques",
+                        "image": "ressources/sprites/weapons/magic_bow.png"},
         # Ajoutez d'autres items ici
     }
 
@@ -19,7 +21,9 @@ class Item:
         item_details = self.items[name]
         self.name = name
         self.rarity = item_details["rarity"]
-        self.magic_damage = item_details["magic_damage"]
+        self.magic_damage = item_details["stats"]["magic_power"]
+        self.health = item_details["stats"]["health"]
+        self.max_health = item_details["stats"]["max_health"]
         self.price = item_details["price"]
         self.description = item_details["description"]
         self.image = item_details["image"]

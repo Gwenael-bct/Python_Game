@@ -5,6 +5,7 @@ from Player_pnj.player import Player
 from Spell.spell_bar import SpellBar
 from Spell.state import Etats
 from Interface.characteristic import Characteristic
+from Interface.inventaire import Inventory
 import os
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -19,13 +20,16 @@ class Game:
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN | pygame.SRCALPHA)
         pygame.display.set_caption('Dream Land')
         # Créer la fenêtre d'inventaire
-        self.inventory_window = Characteristic(self.screen)
+        self.carac_window = Characteristic(self.screen)
         self.show_caracteristic = False
+        self.inventory = Inventory(self.screen)
+        self.show_inventory = False
         self.dragging = False 
         # generer un joueur
         self.player = Player()
         self.all_projectiles = pygame.sprite.Group()
         self.etats = Etats()
+        self.inventory.populate_inventory(self.player.inventaire)
         self.map_manager = MapManager(self.screen, self.player)
         self.monsters = self.map_manager.get_map().monsters
         self.dialog_box = DialogBox(self.screen)
@@ -84,9 +88,13 @@ class Game:
             pos = pygame.mouse.get_pos()
             self.player.level_up()
 
+            if self.show_inventory:
+                self.inventory.draw()
+                self.inventory.handle_events(event, self.player)
+
             if self.show_caracteristic:
-                self.inventory_window.render(self.player)
-                self.inventory_window.handle_events(event, self.player)     
+                self.carac_window.render(self.player)
+                self.carac_window.handle_events(event, self.player)     
 
             # Boucle sur les projectiles du joueur
             for projectile in self.player.all_projectiles:
@@ -133,9 +141,15 @@ class Game:
                     if event.key == pygame.K_e:
                         self.map_manager.check_npc_collisions(self.dialog_box)
 
-                # Inventaire
+                # Caractéristique
                     elif event.key == pygame.K_c:
-                        self.show_caracteristic = not self.show_caracteristic 
+                        self.show_caracteristic = not self.show_caracteristic
+
+                # Inventaire
+                    elif event.key == pygame.K_i:
+                        self.show_inventory = not self.show_inventory
+                        if self.show_inventory:
+                            self.inventory.populate_inventory(self.player.inventaire) 
 
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_a:

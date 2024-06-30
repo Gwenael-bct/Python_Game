@@ -89,6 +89,7 @@ class Player(Entity):
             'Agilité': 0
         }
         self.inventaire = {}
+        self.equipped_items = []
 
     def get_item(self, item):
         if self.rect.colliderect(item.rect):
@@ -98,9 +99,21 @@ class Player(Entity):
             else:
                 # Sinon, crée une nouvelle liste avec une seule instance de l'item
                 self.inventaire[item.name] = [item]
-            print(f"inventaire du joueur: {self.inventaire}")
             item.remove()
             item.kill()
+        
+    def equip_item(self, item):
+        print(f"Equipped {item['name']}")
+        self.equipped_items.append(item)
+        for stat, value in item['stats'].items():
+            setattr(self, stat, getattr(self, stat) + value)
+        print(f"Equipped {item['name']}")
+
+    def unequip_item(self, item):
+        self.equipped_items.remove(item)
+        for stat, value in item['stats'].items():
+            setattr(self, stat, getattr(self, stat) - value)
+
 
     def level_up(self):
         if self.xp >= self.max_xp:

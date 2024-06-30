@@ -418,7 +418,6 @@ class MapManager:
                 else:
                     # Sinon, crée une nouvelle liste avec une seule instance de l'item
                     self.player.inventaire[item["name"]] = [item]
-                print(f"inventaire du joueur: {self.player.inventaire}")
                 self.dropped_items.remove((item, image_item, item_rect))
 
     
@@ -486,7 +485,6 @@ class MapManager:
             monster.apply_state() 
             if monster.health <= 0:
                 self.draw_items(monster)
-                print(self.dropped_items)
                 # Ajouter les monstres morts à la liste temporaire
                 dead_monsters.append(monster)
                 self.player.xp += monster.give_xp
